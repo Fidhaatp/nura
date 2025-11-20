@@ -1429,7 +1429,7 @@ hr.divider {
     }
 
     .footer-links {
-        justify-content: center;
+        justify-content: unset;
     }
 }
 

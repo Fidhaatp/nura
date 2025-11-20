@@ -452,26 +452,23 @@ window.addEventListener('click', function (event) {
 
 // =========carousel script=========
 
+// =============== DESKTOP BOOTSTRAP CAROUSEL – NO AUTO SLIDE ===============
 document.addEventListener('DOMContentLoaded', () => {
-  const carouselEl = document.getElementById('heroCarousel');
-  const carousel = new bootstrap.Carousel(carouselEl, { pause: false });
   const video = document.querySelector('.hero-video');
-  const playButton = document.querySelector('.play-button');
   const thumbnail = document.querySelector('.hero-thumbnail');
   const overlay = document.querySelector('.video-overlay');
+  const playButton = document.querySelector('.play-button');
 
-  // Autoplay when slide becomes active
-  carouselEl.addEventListener('slide.bs.carousel', (e) => {
+  // Autoplay video only when it's the active slide
+  const carousel = document.getElementById('heroCarousel');
+  carousel.addEventListener('slid.bs.carousel', (e) => {
     if (e.to === 0) {
-      // Going to video slide → autoplay
-      video.play().catch(() => console.log("Autoplay prevented"));
-      // Hide thumbnail & overlay after short delay (smooth)
+      video.play();
       setTimeout(() => {
         thumbnail.style.opacity = '0';
         overlay.style.opacity = '0';
-      }, 100);
+      }, 200);
     } else {
-      // Leaving video slide → pause & reset
       video.pause();
       video.currentTime = 0;
       thumbnail.style.opacity = '1';
@@ -479,17 +476,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Optional: Click play button to restart (in case user wants)
+  // Click play button to restart video
   playButton?.addEventListener('click', () => {
     video.play();
     thumbnail.style.opacity = '0';
     overlay.style.opacity = '0';
   });
+});
 
-  // Ensure video is ready
-  video.addEventListener('canplay', () => {
-    if (document.querySelector('.carousel-item.active .hero-video')) {
-      video.play().catch(() => { });
-    }
-  });
+// =============== MOBILE SWIPER – NO AUTO SLIDE ===============
+const mobileSwiper = new Swiper('.video-swiper', {
+  loop: true,
+  autoplay: false,                    // ← THIS STOPS AUTO SLIDING
+  speed: 800,
+  effect: 'fade',
+  fadeEffect: { crossFade: true },
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+  },
+  // Remove navigation if you don't want arrows on mobile
+  // navigation: {
+  //   nextEl: '.swiper-button-next',
+  //   prevEl: '.swiper-button-prev',
+  // },
 });
