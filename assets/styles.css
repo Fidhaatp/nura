@@ -1916,6 +1916,10 @@ select:focus {
         background: #fafafa;
         transition: .3s;
     }
+    .popup-content
+    {
+        max-width: 90%;
+    }
 }
 
 @media (max-width:480px) {
