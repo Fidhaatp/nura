@@ -104,73 +104,56 @@
     </div>
 
     <!-- ==================== HERO CAROUSEL ==================== -->
-    <!-- ==================== HERO CAROUSEL (DESKTOP + MOBILE) ==================== -->
+    <div class="container-fluid">
+        <section class="hero-section" id="s-banner">
+            <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel"
+                data-bs-interval="10000">
 
-<!-- DESKTOP CAROUSEL (Bootstrap 5) -->
-<div class="container-fluid d-none d-lg-block">
-    <section class="hero-section" id="s-banner">
-        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-interval="false">
-            <!-- Video Slide (First) -->
-            <div class="carousel-item active">
-                <div class="video-container position-relative">
-                    <img src="assets/images/desktopbanner.jpg" alt="NURA Video Banner"
-                         class="hero-thumbnail img-fluid w-100">
+                <div class="carousel-inner">
+                    <!-- VIDEO BANNER (AUTOPLAY) -->
+                    <div class="carousel-item active">
+                        <div class="video-container position-relative">
+                            <!-- Poster Image (shown until video loads) -->
+                            <img src="assets/images/desktopbanner.jpg" alt="Video thumbnail"
+                                class="hero-thumbnail img-fluid w-100">
 
-                    <video class="hero-video w-100" poster="assets/images/desktopbanner.jpg"
-                           preload="auto" muted loop playsinline>
-                        <source src="assets/videos/landscapevideobanner.mp4" type="video/mp4">
-                        Your browser does not support video.
-                    </video>
+                            <!-- Video Element (hidden until play) -->
+                            <video class="hero-video w-100 h-100" poster="assets/images/desktopbanner.jpg"
+                                preload="auto" muted loop playsinline>
+                                <source src="assets/videos/landscapevideobanner.mp4" type="video/mp4">
+                                Your browser does not support video.
+                            </video>
 
-                    <div class="video-overlay d-flex justify-content-center align-items-center">
-                        <div class="play-button">
-                            <i class="fas fa-play"></i>
+                            <!-- Overlay + Play Button (optional click) -->
+                            <div class="video-overlay d-flex justify-content-center align-items-center">
+                                <div class="play-button">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- IMAGE BANNER -->
+                    <div class="carousel-item">
+                        <div class="video-container position-relative">
+                            <img src="assets/images/desktopbanner.jpg" alt="NURA Health Screening"
+                                class="hero-thumbnail img-fluid w-100">
                         </div>
                     </div>
                 </div>
+
+                <!-- Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-
-            <!-- Image Slide (Second) -->
-            <div class="carousel-item">
-                <img src="assets/images/desktopbanner.jpg" class="d-block w-100" alt="NURA Health Screening">
-            </div>
-
-            <!-- Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </section>
-</div>
-
-<!-- MOBILE CAROUSEL (Swiper.js) -->
-<div class="container-fluid d-lg-none">
-    <div class="section-mobile-carousel">
-        <div class="swiper video-swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="assets/images/mobilebanner.jpg" alt="NURA Mobile Banner" class="w-100">
-                </div>
-                <div class="swiper-slide">
-                    <video src="assets/videos/landscapevideobanner.mp4" 
-                           class="w-100" muted loop playsinline autoplay></video>
-                </div>
-            </div>
-
-            <!-- Pagination Dots -->
-            <div class="swiper-pagination"></div>
-
-            <!-- Optional: Arrows (remove if you don't want them) -->
-            <!-- <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div> -->
-        </div>
+        </section>
     </div>
-</div>
 
     <!-- mobile carousel -->
     <!-- Video Carousel -->

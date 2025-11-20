@@ -225,8 +225,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-// Auto-play videos when slide becomes active
+// Auto-play videos when slide becomes active (keep this function - it's still needed)
 const playActiveVideo = (swiper) => {
   swiper.slides.forEach((slide, i) => {
     const video = slide.querySelector('video');
@@ -241,13 +240,10 @@ const playActiveVideo = (swiper) => {
   });
 };
 
-// Image Carousel
+// Image Carousel (if you also want to remove autoplay here)
 const imageSwiper = new Swiper('.image-swiper', {
   loop: true,
-  autoplay: {
-    delay: 3000,
-    disableOnInteraction: false,
-  },
+  // autoplay removed completely
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
@@ -258,13 +254,10 @@ const imageSwiper = new Swiper('.image-swiper', {
   },
 });
 
-// Video Carousel
+// Video Carousel - AUTOPLAY REMOVED
 const videoSwiper = new Swiper('.video-swiper', {
   loop: true,
-  autoplay: {
-    delay: 4000,
-    disableOnInteraction: false,
-  },
+  // ← Autoplay completely removed
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
@@ -330,21 +323,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ===== Swiper Init for Mobile =====
+    // ===== Swiper Init for Mobile - AUTOPLAY REMOVED =====
     if (window.innerWidth < 768 && document.querySelector('.testimonials-slider .swiper')) {
         const swiper = new Swiper('.testimonials-slider .swiper', {
             loop: true,
             slidesPerView: 1,
             spaceBetween: 20,
             centeredSlides: true,
-            autoplay: { delay: 5000, disableOnInteraction: false },
-            pagination: { el: '.swiper-pagination', clickable: true },
+            // Autoplay completely removed - no auto-advance anymore
+
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
             breakpoints: {
-                576: { slidesPerView: 1.2, spaceBetween: 15 }
+                576: {
+                    slidesPerView: 1.2,
+                    spaceBetween: 15
+                }
             }
         });
     }
@@ -452,23 +452,26 @@ window.addEventListener('click', function (event) {
 
 // =========carousel script=========
 
-// =============== DESKTOP BOOTSTRAP CAROUSEL – NO AUTO SLIDE ===============
 document.addEventListener('DOMContentLoaded', () => {
+  const carouselEl = document.getElementById('heroCarousel');
+  const carousel = new bootstrap.Carousel(carouselEl, { pause: false });
   const video = document.querySelector('.hero-video');
+  const playButton = document.querySelector('.play-button');
   const thumbnail = document.querySelector('.hero-thumbnail');
   const overlay = document.querySelector('.video-overlay');
-  const playButton = document.querySelector('.play-button');
 
-  // Autoplay video only when it's the active slide
-  const carousel = document.getElementById('heroCarousel');
-  carousel.addEventListener('slid.bs.carousel', (e) => {
+  // Autoplay when slide becomes active
+  carouselEl.addEventListener('slide.bs.carousel', (e) => {
     if (e.to === 0) {
-      video.play();
+      // Going to video slide → autoplay
+      video.play().catch(() => console.log("Autoplay prevented"));
+      // Hide thumbnail & overlay after short delay (smooth)
       setTimeout(() => {
         thumbnail.style.opacity = '0';
         overlay.style.opacity = '0';
-      }, 200);
+      }, 100);
     } else {
+      // Leaving video slide → pause & reset
       video.pause();
       video.currentTime = 0;
       thumbnail.style.opacity = '1';
@@ -476,28 +479,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Click play button to restart video
+  // Optional: Click play button to restart (in case user wants)
   playButton?.addEventListener('click', () => {
     video.play();
     thumbnail.style.opacity = '0';
     overlay.style.opacity = '0';
   });
-});
 
-// =============== MOBILE SWIPER – NO AUTO SLIDE ===============
-const mobileSwiper = new Swiper('.video-swiper', {
-  loop: true,
-  autoplay: false,                    // ← THIS STOPS AUTO SLIDING
-  speed: 800,
-  effect: 'fade',
-  fadeEffect: { crossFade: true },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-  },
-  // Remove navigation if you don't want arrows on mobile
-  // navigation: {
-  //   nextEl: '.swiper-button-next',
-  //   prevEl: '.swiper-button-prev',
-  // },
+  // Ensure video is ready
+  video.addEventListener('canplay', () => {
+    if (document.querySelector('.carousel-item.active .hero-video')) {
+      video.play().catch(() => { });
+    }
+  });
 });
