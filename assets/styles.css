@@ -1769,6 +1769,10 @@ select {
     transition: .3s;
 }
 
+.iti {
+    display: ruby;
+}   
+
 input:focus,
 select:focus {
     outline: none;
@@ -1869,18 +1873,6 @@ select:focus {
     display: block;
 }
 
-input[type=text],
-input[type=tel],
-input[type=email],
-select {
-    width: 515px;
-    padding: 12px 16px;
-    border: 2px solid #d0d5dd;
-    border-radius: 10px;
-    font-size: 15px;
-    background: #fafafa;
-    transition: .3s;
-}
 
 .section-padding {
     margin-top: 100px;
@@ -1916,7 +1908,7 @@ select {
     input[type=tel],
     input[type=email],
     select {
-        width: 310px;
+        /* width: 310px; */
         padding: 12px 16px;
         border: 2px solid #d0d5dd;
         border-radius: 10px;
